@@ -3,20 +3,20 @@
 // so the first load stays small and the charts are part of the source.
 export function buildCategoryBarChart(rows, width) {
   const w = width || 560;
-  const rowH = 27;
+  const rowH = 21;
   const h = rows.length * rowH + 8;
   const max = Math.max(...rows.map((r) => r.value), 1);
-  const labelW = 118;
-  const valueW = 74;
+  const labelW = 108;
+  const valueW = 68;
   const barW = w - labelW - valueW;
   const bars = rows
     .map((row, i) => {
       const y = 8 + i * rowH;
       const bw = Math.max(2, (row.value / max) * barW);
       return (
-        `<text x="0" y="${y + 15}" class="chart-label">${escapeHtml(row.label)}</text>` +
-        `<rect x="${labelW}" y="${y}" width="${bw}" height="20" rx="5" fill="${row.color}" />` +
-        `<text x="${labelW + bw + 8}" y="${y + 15}" class="chart-value">${row.text}</text>`
+        `<text x="0" y="${y + 13}" class="chart-label">${escapeHtml(row.label)}</text>` +
+        `<rect x="${labelW}" y="${y}" width="${bw}" height="16" rx="5" fill="${row.color}" />` +
+        `<text x="${labelW + bw + 8}" y="${y + 13}" class="chart-value">${row.text}</text>`
       );
     })
     .join("");

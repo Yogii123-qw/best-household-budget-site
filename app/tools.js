@@ -36,7 +36,7 @@ export function renderPlannerPage(state) {
   <div class="planner-layout">
   <section class="card">
     <h2>50/30/20 planner</h2>
-    <p class="card-note">Split the monthly take-home pay of ${formatMoney(income)} into needs, wants and savings.</p>
+    <p class="card-note">Split the monthly take-home pay of ${formatMoney(income)} into needs, wants and savings. This month: ${formatMoney(monthSpent(state))} spent, ${formatMoney(savedActual)} saved.</p>
     <form class="tx-form" data-form="income">
       <label>Monthly take-home pay ($) <input type="number" name="income" min="0" step="1" value="${income}" required></label>
       <button type="submit" class="btn">Update income</button>

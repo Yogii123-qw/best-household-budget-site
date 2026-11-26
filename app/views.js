@@ -30,9 +30,8 @@ export function renderDashboard(state) {
   const totals = categoryTotals(state).sort((a, b) => b.spent - a.spent);
   const chartRows = totals
     .filter((t) => t.spent > 0)
-    .slice(0, 7)
     .map((t) => ({ label: t.name, value: t.spent, color: t.color, text: formatMoneyShort(t.spent) }));
-  const bills = state.bills.filter((b) => !isBillPaid(state, b.id)).slice(0, 3);
+  const bills = state.bills.filter((b) => !isBillPaid(state, b.id));
   const recent = monthTransactions(state).slice(0, 4);
   const summary = [
     { label: "Income, " + monthLabel(state), value: formatMoney(income), sub: "Take-home pay, two salaries" },
@@ -48,7 +47,7 @@ export function renderDashboard(state) {
     <section class="card chart-card">
       <h2>Spending by category</h2>
       <p class="card-note">${monthLabel(state)}, ${formatMoney(spent)} spent in total</p>
-      ${buildCategoryBarChart(chartRows, 520)}
+      ${buildCategoryBarChart(chartRows, 400)}
     </section>
     <section class="card">
       <h2>Budget health</h2>
@@ -175,6 +174,10 @@ export function renderBillsPage(state) {
   const paid = rows.filter((b) => b.paid);
   const unpaidTotal = unpaid.reduce((sum, b) => sum + b.amount, 0);
   const paidTotal = paid.reduce((sum, b) => sum + b.amount, 0);
+  const autoBills = rows.filter((b) => b.autopay);
+  const handBills = rows.filter((b) => !b.autopay);
+  const autoTotal = autoBills.reduce((sum, b) => sum + b.amount, 0);
+  const handTotal = handBills.reduce((sum, b) => sum + b.amount, 0);
   const rowHtml = (b) => `<li class="bill-row ${b.paid ? "is-paid" : ""}">
     <div class="bill-main"><span class="bill-name">${escapeHtml(b.name)}</span>
     <span class="muted">${b.autopay ? "Autopay on" : "Pay by hand"}</span></div>
@@ -195,6 +198,7 @@ export function renderBillsPage(state) {
       <div class="stat-card"><div class="stat-label">Monthly bill total</div><div class="stat-value">${formatMoney(unpaidTotal + paidTotal)}</div><div class="stat-sub">${state.bills.length} recurring bills</div></div>
       <div class="stat-card"><div class="stat-label">Next due</div><div class="stat-value">${unpaid.length ? escapeHtml(urgent.name) : "None"}</div><div class="stat-sub">${urgentSub}</div></div>
     </div>
+    <p class="card-note">Autopay covers ${autoBills.length} bills (${formatMoney(autoTotal)} a month). ${handBills.length} bills are paid by hand (${formatMoney(handTotal)}).</p>
   </section>
   <section class="card">
     <h2>Upcoming bills</h2>
