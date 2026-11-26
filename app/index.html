@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hearth Ledger: household budget</title>
+<meta name="description" content="Hearth Ledger is a household budget site that shows where every dollar goes and what is left for what matters.">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#/">
+      <svg class="brand-mark" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><path d="M16 3 L29 15 H25 V29 H19 V20 H13 V29 H7 V15 H3 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      <span class="brand-name">Hearth Ledger</span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="nav-link" href="#/">Dashboard</a>
+      <a class="nav-link" href="#/transactions">Transactions</a>
+      <a class="nav-link" href="#/budgets">Budgets</a>
+      <a class="nav-link" href="#/bills">Bills</a>
+      <a class="nav-link" href="#/planner">Planner</a>
+      <a class="nav-link" href="#/reports">Reports</a>
+    </nav>
+    <div class="header-controls">
+      <label class="month-picker">Month
+        <select id="month-select" aria-label="Month">
+          <option value="2026-10">October 2026</option>
+          <option value="2026-11" selected>November 2026</option>
+        </select>
+      </label>
+      <button class="btn btn-ghost" data-action="theme" type="button">Dark theme</button>
+    </div>
+  </div>
+</header>
+<main id="app" class="page" aria-live="polite"></main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p><strong>Hearth Ledger</strong> is a household budget that shows where every dollar goes and what is left for what matters.</p>
+    <nav aria-label="Footer navigation">
+      <a href="#/">Dashboard</a>
+      <a href="#/transactions">Transactions</a>
+      <a href="#/budgets">Budgets</a>
+      <a href="#/bills">Bills</a>
+      <a href="#/planner">Planner</a>
+      <a href="#/reports">Reports</a>
+    </nav>
+    <p class="muted">All data stays in this browser. Nothing leaves the device.</p>
+  </div>
+</footer>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script type="module" src="./main.js"></script>
+</body>
+</html>
